@@ -1,0 +1,76 @@
+<!doctype html>
+
+<html>
+<head>
+  <meta charset="utf-8">
+
+  <title>🐈動画視聴🐈🐈🐈</title>
+
+  <style>
+    video {
+        display: block;
+    }
+    .my-4 {
+        margin-top: 1rem;
+        margin-bottom: 1rem;
+    }
+  </style>
+</head>
+
+<body>
+
+    <article>
+        <video type="video/webm" width="1280" height="720" controls></video>
+        <div id="videos" class="my-4"></div>
+        <button id="btnSlow">0.5倍速</button>
+        <button id="btnNormal">1.0倍速</button>
+        <button id="btnFast">2.0倍速</button>
+        <button id="btnVeryFast">3.0倍速</button>
+      </article>
+
+</body>
+
+<script>
+window.addEventListener('DOMContentLoaded', function(){
+
+    const videoElement = document.querySelector("video");
+    const btnSlow = document.getElementById("btnSlow");
+    const btnNormal = document.getElementById("btnNormal");
+    const btnFast = document.getElementById("btnFast");
+    const btnVeryFast = document.getElementById("btnVeryFast");
+
+
+    btnSlow.addEventListener("click", (e) => {
+    videoElement.playbackRate = 0.5;
+    });
+
+    btnNormal.addEventListener("click", (e) => {
+    videoElement.playbackRate = 1.0;
+    });
+
+    btnFast.addEventListener("click", (e) => {
+    videoElement.playbackRate = 2.0;
+    });
+
+    btnVeryFast.addEventListener("click", (e) => {
+    videoElement.playbackRate = 3.0;
+    });
+
+    const videosElement = document.getElementById("videos");
+
+    const videos_array = ['Section1.mp4', 'video2.mp4', 'video3_1.mp4', 'video3_2.mp4', 'video4.mp4', 'video5.mp4'];
+
+    videos_array.forEach(element => {
+        
+        var newVideoBtn = document.createElement('button');
+        newVideoBtn.textContent = element;
+        videosElement.appendChild(newVideoBtn);
+
+        newVideoBtn.onclick= function() {
+            videoElement.src = element;
+        };
+    });
+
+});
+</script>
+</html>
