@@ -24,6 +24,9 @@
         <div id="videos" class="my-4"></div>
         <button id="btnSlow">0.5倍速</button>
         <button id="btnNormal">1.0倍速</button>
+        <button id="btnFast25">1.25倍速</button>
+        <button id="btnFast50">1.5倍速</button>
+        <button id="btnFast75">1.75倍速</button>
         <button id="btnFast">2.0倍速</button>
         <button id="btnVeryFast">3.0倍速</button>
       </article>
@@ -31,34 +34,43 @@
 </body>
 
 <script>
-window.addEventListener('DOMContentLoaded', function(){
 
+window.addEventListener('DOMContentLoaded', function(){
+    // video
     const videoElement = document.querySelector("video");
+    const videoSpeed = (htmlElem, playbackRate) => {
+        htmlElem.addEventListener("click", (e) => {
+        videoElement.playbackRate = playbackRate;
+        });
+    }
+
+    const keypressEvent = (keyPress, skip) => {
+        document.addEventListener('keypress', (e) => {
+            if(e.key === keyPress){
+                videoElement.currentTime -= skip;
+            }
+        });
+    }
+    keypressEvent('arrowLeft', -5)
+    keypressEvent('arrowRight', 5)
+    // Buttons
     const btnSlow = document.getElementById("btnSlow");
     const btnNormal = document.getElementById("btnNormal");
+    const btnFast25 = document.getElementById("btnFast25");
     const btnFast = document.getElementById("btnFast");
     const btnVeryFast = document.getElementById("btnVeryFast");
 
-
-    btnSlow.addEventListener("click", (e) => {
-    videoElement.playbackRate = 0.5;
-    });
-
-    btnNormal.addEventListener("click", (e) => {
-    videoElement.playbackRate = 1.0;
-    });
-
-    btnFast.addEventListener("click", (e) => {
-    videoElement.playbackRate = 2.0;
-    });
-
-    btnVeryFast.addEventListener("click", (e) => {
-    videoElement.playbackRate = 3.0;
-    });
+    videoSpeed(btnSlow, 0.5);
+    videoSpeed(btnNormal, 1.0);
+    videoSpeed(btnFast25, 1.25);
+    videoSpeed(btnFast50, 1.50);
+    videoSpeed(btnFast75, 1.75);
+    videoSpeed(btnFast, 2.0);
+    videoSpeed(btnVeryFast, 3.0);
 
     const videosElement = document.getElementById("videos");
 
-    const videos_array = ['Section1.mp4', 'video2.mp4', 'video3_1.mp4', 'video3_2.mp4', 'video4.mp4', 'video5.mp4'];
+    const videos_array = ['video1.mp4', 'video2.mp4', 'video3.mp4', 'video4.mp4', 'video5.mp4'];
 
     videos_array.forEach(element => {
         
